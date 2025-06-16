@@ -1,9 +1,9 @@
 // Profile Configuration
 export const profileConfig = {
-  id: "YOUR_DISCORD_ID",
-  username: "YourName",
-  discriminator: "0000",
-  avatar: "YOUR_AVATAR_HASH",
+  id: "1186206505658220597",
+  username: "darkplusx",
+  discriminator: "9292",
+  avatar: "f2f0804d53d3863c8646baca897b7514",
   bio: "🌟 Full-stack Developer | Open Source Contributor | UI/UX Designer | Coffee Enthusiast | Game Developer | Competitive Gamer | Chess Enthusiast",
   status: {
     text: "Playing Tic Tac Toe",

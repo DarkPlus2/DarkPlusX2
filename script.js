@@ -3,7 +3,6 @@ import {
   badgesConfig, 
   tagsConfig, 
   socialConfig, 
-  connectionsConfig, 
   themesConfig,
   animationConfig,
   audioConfig
@@ -20,48 +19,28 @@ const DOM = {
   statusText: document.querySelector('.status-text'),
   activityTitle: document.querySelector('.activity-title'),
   activityDescription: document.querySelector('.activity-description'),
-  activityIcon: document.querySelector('.activity-icon-img'),
+  activityIcon: document.querySelector('.activity-icon i'),
   progressBar: document.querySelector('.progress-bar'),
   timeText: document.querySelector('.time-text'),
-  followersCount: document.getElementById('followers-count'),
-  projectsCount: document.getElementById('projects-count'),
-  likesCount: document.getElementById('likes-count'),
   lastUpdated: document.getElementById('last-updated'),
   badgesContainer: document.querySelector('.badges-container'),
   tagsContainer: document.querySelector('.tags-container'),
   socialLinks: document.querySelector('.social-links'),
-  connectionsGrid: document.querySelector('.connections-grid'),
 
   // Theme Elements
   themePanel: document.querySelector('.theme-panel'),
   themeGrid: document.querySelector('.theme-grid'),
   themeBtn: document.querySelector('.theme-btn'),
 
-  // Settings Elements
-  settingsPanel: document.querySelector('.settings-panel'),
-  settingsBtn: document.querySelector('.settings-btn'),
-  avatarAnimationToggle: document.getElementById('avatar-animation'),
-  particlesEnabledToggle: document.getElementById('particles-enabled'),
-  cursorEffectsToggle: document.getElementById('cursor-effects'),
-  particleDensitySlider: document.getElementById('particle-density'),
-  particleDensityValue: document.querySelector('#particle-density + .value-display'),
-  animationSpeedSlider: document.getElementById('animation-speed'),
-  animationSpeedValue: document.querySelector('#animation-speed + .value-display'),
-
   // Game Elements
   gamePanel: document.querySelector('.game-panel'),
   gameBtn: document.querySelector('.game-btn'),
-  gameCanvas: document.getElementById('game-canvas'),
-  startGameBtn: document.getElementById('start-game'),
-  resetGameBtn: document.getElementById('reset-game'),
-  gameScore: document.getElementById('game-score'),
-  highScore: document.getElementById('high-score'),
-  gameLevel: document.getElementById('game-level'),
 
-  // Music Elements
+  // Audio Elements
   musicToggle: document.querySelector('.music-toggle'),
-  volumeSlider: document.getElementById('volume-slider'),
   bgMusic: document.getElementById('bg-music'),
+  clickSound: document.getElementById('click-sound'),
+  winSound: document.getElementById('win-sound'),
 
   // Cursor Elements
   customCursor: document.querySelector('.custom-cursor'),
@@ -94,10 +73,7 @@ function initProfile() {
   DOM.progressBar.style.width = `${profileConfig.activity.progress}%`;
   DOM.timeText.textContent = profileConfig.activity.time;
   
-  // Set stats
-  animateCounter(DOM.followersCount, profileConfig.stats.followers);
-  animateCounter(DOM.projectsCount, profileConfig.stats.projects);
-  animateCounter(DOM.likesCount, profileConfig.stats.likes);
+  // Set last updated
   DOM.lastUpdated.textContent = profileConfig.lastUpdated;
   
   // Create badges
@@ -128,22 +104,6 @@ function initProfile() {
       <span>${social.name}</span>
     `;
     DOM.socialLinks.appendChild(socialLink);
-  });
-  
-  // Create connections
-  connectionsConfig.forEach(connection => {
-    const connectionElement = document.createElement('div');
-    connectionElement.className = 'connection';
-    connectionElement.innerHTML = `
-      <div class="connection-icon">
-        <i class="${connection.icon}"></i>
-      </div>
-      <div class="connection-details">
-        <div class="connection-platform">${connection.platform.charAt(0).toUpperCase() + connection.platform.slice(1)}</div>
-        <div class="connection-username">${connection.username}</div>
-      </div>
-    `;
-    DOM.connectionsGrid.appendChild(connectionElement);
   });
 }
 
@@ -176,6 +136,9 @@ function setTheme(themeName) {
   document.documentElement.style.setProperty('--background-color', theme.background);
   document.documentElement.style.setProperty('--card-color', theme.card);
   document.documentElement.style.setProperty('--text-color', theme.text);
+  document.documentElement.style.setProperty('--x-color', theme.xColor);
+  document.documentElement.style.setProperty('--o-color', theme.oColor);
+  document.documentElement.style.setProperty('--win-color', theme.winColor);
 
   // Save theme preference
   localStorage.setItem('theme', themeName);
@@ -244,9 +207,7 @@ function initParticles() {
     particle.style.top = `${Math.random() * 100}%`;
     
     // Random animation duration
-    const duration = Math.random() * 
-      (animationConfig.floatDuration.max - animationConfig.floatDuration.min) + 
-      animationConfig.floatDuration.min;
+    const duration = Math.random() * 20 + 10;
     particle.style.animationDuration = `${duration}s`;
     
     // Random delay
@@ -274,7 +235,7 @@ function initCursorEffects() {
 
   // Interactive elements hover effects
   const interactiveElements = document.querySelectorAll(
-    'a, button, .badge, .tag, .social-link, .connection, .theme-option, .game-btn, .toggle-switch'
+    'a, button, .badge, .tag, .social-link, .theme-option, .btn, .cell'
   );
 
   interactiveElements.forEach(el => {
@@ -298,22 +259,16 @@ function initAudio() {
 
   // Set initial volume
   DOM.bgMusic.volume = audioConfig.volume;
-  DOM.volumeSlider.value = audioConfig.volume;
 
   // Music toggle
   DOM.musicToggle.addEventListener('click', () => {
     if (DOM.bgMusic.paused) {
       DOM.bgMusic.play();
-      DOM.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+      DOM.musicToggle.innerHTML = '<i class="fas fa-music"></i><span>Music</span>';
     } else {
       DOM.bgMusic.pause();
-      DOM.musicToggle.innerHTML = '<i class="fas fa-music-slash"></i>';
+      DOM.musicToggle.innerHTML = '<i class="fas fa-music-slash"></i><span>Music</span>';
     }
-  });
-
-  // Volume control
-  DOM.volumeSlider.addEventListener('input', (e) => {
-    DOM.bgMusic.volume = e.target.value;
   });
 }
 
@@ -322,28 +277,22 @@ function initEventListeners() {
   // Theme panel toggle
   DOM.themeBtn.addEventListener('click', () => {
     DOM.themePanel.classList.toggle('panel-active');
-    DOM.settingsPanel.classList.remove('panel-active');
     DOM.gamePanel.classList.remove('panel-active');
-  });
-
-  // Settings panel toggle
-  DOM.settingsBtn.addEventListener('click', () => {
-    DOM.settingsPanel.classList.toggle('panel-active');
-    DOM.themePanel.classList.remove('panel-active');
-    DOM.gamePanel.classList.remove('panel-active');
+    playClickSound();
   });
 
   // Game panel toggle
   DOM.gameBtn.addEventListener('click', () => {
     DOM.gamePanel.classList.toggle('panel-active');
     DOM.themePanel.classList.remove('panel-active');
-    DOM.settingsPanel.classList.remove('panel-active');
+    playClickSound();
   });
 
   // Close panels
   DOM.closePanelBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      btn.closest('.theme-panel, .settings-panel, .game-panel').classList.remove('panel-active');
+      btn.closest('.panel').classList.remove('panel-active');
+      playClickSound();
     });
   });
 
@@ -352,69 +301,30 @@ function initEventListeners() {
     if (e.target.closest('.theme-option')) {
       const themeName = e.target.closest('.theme-option').dataset.theme;
       setTheme(themeName);
+      playClickSound();
     }
   });
 
-  // Settings controls
-  DOM.avatarAnimationToggle.addEventListener('change', (e) => {
-    if (e.target.checked) {
-      DOM.avatarContainer.classList.add('floating');
-    } else {
-      DOM.avatarContainer.classList.remove('floating');
+  // Play click sound on interactive elements
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .badge, .tag, .theme-option, .cell')) {
+      playClickSound();
     }
   });
-
-  DOM.particlesEnabledToggle.addEventListener('change', (e) => {
-    if (e.target.checked) {
-      initParticles();
-    } else {
-      document.querySelector('.particles').innerHTML = '';
-    }
-  });
-
-  DOM.cursorEffectsToggle.addEventListener('change', (e) => {
-    if (e.target.checked) {
-      initCursorEffects();
-    } else {
-      // Disable cursor effects
-      DOM.customCursor.style.display = 'none';
-      DOM.cursorTrail.style.display = 'none';
-    }
-  });
-
-  DOM.particleDensitySlider.addEventListener('input', (e) => {
-    const value = e.target.value;
-    DOM.particleDensityValue.textContent = value;
-    animationConfig.particleCount = parseInt(value);
-    if (DOM.particlesEnabledToggle.checked) {
-      initParticles();
-    }
-  });
-
-  DOM.animationSpeedSlider.addEventListener('input', (e) => {
-    const value = e.target.value;
-    DOM.animationSpeedValue.textContent = `${value}x`;
-    document.documentElement.style.setProperty('--transition-speed', `${value}s`);
-  });
-
-  // Initialize game if enabled
-  if (gameConfig.enabled) {
-    initGame();
-  }
 }
 
-// Animate counter
-function animateCounter(element, target) {
-  let current = 0;
-  const increment = target / 50;
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      clearInterval(timer);
-      current = target;
-    }
-    element.textContent = Math.floor(current).toLocaleString();
-  }, 20);
+// Play Click Sound
+function playClickSound() {
+  if (!audioConfig.enabled) return;
+  DOM.clickSound.currentTime = 0;
+  DOM.clickSound.play();
+}
+
+// Play Win Sound
+function playWinSound() {
+  if (!audioConfig.enabled) return;
+  DOM.winSound.currentTime = 0;
+  DOM.winSound.play();
 }
 
 // Initialize the app

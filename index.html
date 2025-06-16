@@ -3,225 +3,1105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ULTIMATE Discord Profile</title>
+  <title>MEGA ULTIMATE DISCORD PROFILE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+  <style>
+    :root {
+      --primary: #5865F2;
+      --background: #313338;
+      --card-bg: #232428;
+      --text-primary: #F2F3F5;
+      --text-secondary: #B5BAC1;
+      --accent: #23A559;
+      --danger: #F23F43;
+      --warning: #F0B232;
+      --info: #00A8FC;
+      --online: #3BA55D;
+      --idle: #FAA81A;
+      --dnd: #ED4245;
+      --offline: #747F8D;
+      --boost: #FF73FA;
+      --nitro: #FF73FA;
+      --spotify: #1DB954;
+      --border-radius: 16px;
+      --box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--background);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    .background-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(117, 127, 242, 0.15) 100%);
+      z-index: -1;
+      animation: gradientShift 15s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      width: 100%;
+      max-width: 460px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      z-index: 1;
+      margin: 20px 0;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(90deg, var(--primary) 0%, rgba(88, 101, 242, 0.8) 100%);
+      z-index: -1;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    /* Avatar & Status */
+    .avatar-container {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      border: 6px solid var(--card-bg);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .status {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--online);
+      border: 4px solid var(--card-bg);
+      z-index: 2;
+      transition: var(--transition);
+    }
+
+    .status-ripple {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--online);
+      border: 4px solid var(--card-bg);
+      z-index: 1;
+      animation: ripple 1.5s infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes ripple {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    .avatar-badge {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      border: 4px solid var(--card-bg);
+      transition: var(--transition);
+    }
+
+    .avatar-badge-nitro {
+      top: 0;
+      left: 0;
+      background-color: var(--nitro);
+    }
+
+    .avatar-badge-boost {
+      top: 0;
+      right: 0;
+      background-color: var(--boost);
+    }
+
+    /* Username & Badges */
+    .username {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .username-text {
+      color: var(--text-primary);
+    }
+
+    .discriminator {
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .badge:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
+    }
+
+    /* Bio & Status */
+    .bio {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-size: 16px;
+      padding: 0 10px;
+    }
+
+    .custom-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: rgba(88, 101, 242, 0.15);
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--primary);
+      transition: var(--transition);
+    }
+
+    .custom-status:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(88, 101, 242, 0.2);
+    }
+
+    .status-emoji {
+      font-size: 20px;
+    }
+
+    .status-text {
+      font-size: 15px;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .divider {
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 24px 0;
+      width: 100%;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+    }
+
+    .tag-booster {
+      background-color: rgba(255, 115, 250, 0.15);
+      color: var(--boost);
+    }
+
+    .tag-admin {
+      background-color: rgba(237, 66, 69, 0.15);
+      color: var(--dnd);
+    }
+
+    .tag-moderator {
+      background-color: rgba(59, 165, 93, 0.15);
+      color: var(--online);
+    }
+
+    .tag-owner {
+      background-color: rgba(250, 168, 26, 0.15);
+      color: var(--idle);
+    }
+
+    /* Activities */
+    .activities {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .activity {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.25);
+      padding: 16px;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .activity:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .activity-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background-color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .activity-spotify {
+      background-color: var(--spotify);
+    }
+
+    .activity-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-name {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-state {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-progress {
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background-color: var(--primary);
+      transition: width 0.5s linear;
+    }
+
+    .progress-fill-spotify {
+      background-color: var(--spotify);
+    }
+
+    .progress-time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Socials */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .social {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 18px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .social:hover {
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Connections */
+    .connections {
+      margin-bottom: 24px;
+    }
+
+    .connections-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 18px;
+    }
+
+    .connections-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .connection {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .connection:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .connection i {
+      width: 24px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .connection-username {
+      margin-left: auto;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Servers */
+    .servers-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .server-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+
+    .server-card:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .server-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .server-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .server-name {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .server-members {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .server-members i {
+      font-size: 12px;
+    }
+
+    /* Theme Selector */
+    .theme-selector-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .theme-selector {
+      position: relative;
+    }
+
+    .theme-selector-toggle {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: var(--card-bg);
+      border: none;
+      color: var(--text-primary);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .theme-selector-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+    }
+
+    .theme-options {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .theme-selector:hover .theme-options {
+      display: flex;
+    }
+
+    .theme-option {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .theme-option:hover {
+      transform: scale(1.15);
+    }
+
+    .theme-option[data-theme="default"] {
+      background-color: #5865F2;
+    }
+
+    .theme-option[data-theme="dark"] {
+      background-color: #23272A;
+    }
+
+    .theme-option[data-theme="light"] {
+      background-color: #FFFFFF;
+    }
+
+    .theme-option[data-theme="pink"] {
+      background-color: #EB459E;
+    }
+
+    .theme-option[data-theme="purple"] {
+      background-color: #9C84EF;
+    }
+
+    /* Cursor Follower */
+    .cursor-follower {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: screen;
+      z-index: 9999;
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px;
+        max-width: 100%;
+      }
+
+      .avatar-container {
+        width: 120px;
+        height: 120px;
+      }
+
+      .username {
+        font-size: 24px;
+      }
+
+      .badges {
+        gap: 10px;
+      }
+
+      .badge {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+      }
+
+      .servers-container {
+        grid-template-columns: 1fr;
+      }
+
+      .activity-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+      }
+
+      .server-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .socials {
+        gap: 14px;
+      }
+
+      .social {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 20px;
+      }
+
+      .avatar-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .username {
+        font-size: 22px;
+      }
+
+      .activity {
+        padding: 12px;
+      }
+
+      .activity-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+      }
+
+      .server-card {
+        padding: 12px;
+      }
+
+      .server-icon {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="universe">
-    <div class="stars"></div>
-    <div class="twinkling"></div>
-    <div class="shooting-stars"></div>
-    <div class="particles"></div>
-  </div>
-
-  <!-- Theme Panel -->
-  <div class="panel theme-panel">
-    <div class="panel-header">
-      <h3><i class="fas fa-palette"></i> THEME SELECTOR</h3>
-      <button class="close-panel"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="theme-grid"></div>
-  </div>
-
-  <!-- Game Panel -->
-  <div class="panel game-panel">
-    <div class="panel-header">
-      <h3><i class="fas fa-gamepad"></i> TIC TAC TOE</h3>
-      <button class="close-panel"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="game-container">
-      <div class="game-info">
-        <div class="player-turn">
-          <span id="current-player">X</span>'s Turn
-        </div>
-        <div class="game-stats">
-          <div class="stat">
-            <span>X Wins:</span>
-            <span id="x-wins">0</span>
-          </div>
-          <div class="stat">
-            <span>O Wins:</span>
-            <span id="o-wins">0</span>
-          </div>
-          <div class="stat">
-            <span>Draws:</span>
-            <span id="draws">0</span>
-          </div>
-        </div>
-      </div>
-      <div class="tic-tac-toe-grid" id="game-board">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
-      </div>
-      <div class="game-controls">
-        <button id="reset-game" class="btn">Reset Game</button>
-        <button id="new-game" class="btn primary">New Game</button>
+  <div class="theme-selector-container">
+    <div class="theme-selector">
+      <button class="theme-selector-toggle" aria-label="Theme selector">
+        <i class="fas fa-palette"></i>
+      </button>
+      <div class="theme-options">
+        <div class="theme-option" data-theme="default" aria-label="Default theme"></div>
+        <div class="theme-option" data-theme="dark" aria-label="Dark theme"></div>
+        <div class="theme-option" data-theme="light" aria-label="Light theme"></div>
+        <div class="theme-option" data-theme="pink" aria-label="Pink theme"></div>
+        <div class="theme-option" data-theme="purple" aria-label="Purple theme"></div>
       </div>
     </div>
   </div>
 
-  <!-- Navigation -->
-  <nav class="main-nav">
-    <button class="nav-btn theme-btn">
-      <i class="fas fa-palette"></i>
-      <span>Themes</span>
-    </button>
-    <button class="nav-btn game-btn">
-      <i class="fas fa-gamepad"></i>
-      <span>Game</span>
-    </button>
-    <button class="nav-btn music-toggle">
-      <i class="fas fa-music"></i>
-      <span>Music</span>
-    </button>
-  </nav>
+  <div class="background-animation" aria-hidden="true"></div>
 
-  <!-- Main Profile Card -->
-  <main class="profile-card animate__animated animate__fadeIn">
-    <div class="card-header">
-      <div class="card-buttons">
-        <span class="card-btn close"></span>
-        <span class="card-btn minimize"></span>
-        <span class="card-btn maximize"></span>
+  <main class="card">
+    <div class="avatar-container">
+      <img alt="User avatar" class="avatar" src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=512" loading="lazy">
+      <div class="status" title="Online" aria-label="Online status"></div>
+      <div class="status-ripple" aria-hidden="true"></div>
+      <div class="avatar-badge avatar-badge-nitro" title="Nitro subscriber" aria-label="Nitro subscriber">
+        <i class="fas fa-gem" aria-hidden="true"></i>
       </div>
-      <div class="card-title">ULTIMATE PROFILE</div>
+      <div class="avatar-badge avatar-badge-boost" title="Server booster" aria-label="Server booster">
+        <i class="fas fa-rocket" aria-hidden="true"></i>
+      </div>
     </div>
 
-    <div class="profile-content">
-      <!-- Profile Section -->
-      <section class="profile-section">
-        <div class="avatar-container">
-          <img src="https://cdn.discordapp.com/avatars/YOUR_ID/YOUR_AVATAR.webp?size=512" alt="Avatar" class="profile-avatar floating">
-          <div class="status-indicator online"></div>
-          <div class="status-ripple"></div>
-          <div class="avatar-halo"></div>
-          <div class="avatar-decoration crown">
-            <i class="fas fa-crown"></i>
-          </div>
-        </div>
-
-        <div class="profile-info">
-          <h1 class="profile-name">
-            <span class="username">YourName</span>
-            <span class="discriminator">#0000</span>
-          </h1>
-          
-          <div class="badges-container">
-            <div class="badge" data-tooltip="Discord Staff">
-              <i class="fas fa-check"></i>
-            </div>
-            <div class="badge" data-tooltip="Partnered Server Owner">
-              <i class="fas fa-heart"></i>
-            </div>
-            <div class="badge" data-tooltip="Certified Moderator">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-          </div>
-
-          <div class="profile-status">
-            <i class="status-emoji fas fa-smile"></i>
-            <span class="status-text">Playing Tic Tac Toe</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Bio Section -->
-      <section class="bio-section">
-        <p class="profile-bio">🌟 Full-stack Developer | Open Source Contributor | UI/UX Designer | Coffee Enthusiast | Game Developer | Competitive Gamer | Chess Enthusiast</p>
-      </section>
-
-      <!-- Divider -->
-      <div class="section-divider">
-        <span class="divider-line"></span>
-        <span class="divider-icon"><i class="fas fa-star"></i></span>
-        <span class="divider-line"></span>
+    <h1 class="username">
+      <span class="username-text">UltimateUser</span>
+      <span class="discriminator" aria-label="Discriminator">#0001</span>
+    </h1>
+    
+    <div class="badges" aria-label="User badges">
+      <div class="badge" title="Discord Staff" aria-label="Discord Staff badge">
+        <i class="fas fa-star" aria-hidden="true"></i>
       </div>
-
-      <!-- Tags Section -->
-      <section class="tags-section">
-        <div class="tags-container">
-          <span class="tag">#developer</span>
-          <span class="tag">#gamer</span>
-          <span class="tag">#javascript</span>
-          <span class="tag">#design</span>
-          <span class="tag">#competitive</span>
-        </div>
-      </section>
-
-      <!-- Activity Section -->
-      <section class="activity-section">
-        <div class="activity-card">
-          <div class="activity-icon">
-            <i class="fas fa-chess"></i>
-          </div>
-          <div class="activity-details">
-            <h4 class="activity-title">Playing Tic Tac Toe</h4>
-            <p class="activity-description">Current streak: 3 wins</p>
-            <div class="activity-progress">
-              <div class="progress-bar" style="width: 75%"></div>
-            </div>
-            <div class="activity-time">
-              <i class="far fa-clock"></i>
-              <span class="time-text">15m 22s</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Social Links -->
-      <section class="social-section">
-        <div class="social-links">
-          <a href="https://discord.com/users/YOUR_ID" class="social-link discord" target="_blank">
-            <i class="fab fa-discord"></i>
-            <span>Discord</span>
-          </a>
-          <a href="https://github.com/YOUR_GITHUB" class="social-link github" target="_blank">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-          <a href="https://twitter.com/YOUR_TWITTER" class="social-link twitter" target="_blank">
-            <i class="fab fa-twitter"></i>
-            <span>Twitter</span>
-          </a>
-        </div>
-      </section>
+      <div class="badge" title="Partnered Server Owner" aria-label="Partnered Server Owner badge">
+        <i class="fas fa-check" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="HypeSquad Events" aria-label="HypeSquad Events badge">
+        <i class="fas fa-bolt" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="Bug Hunter Level 2" aria-label="Bug Hunter Level 2 badge">
+        <i class="fas fa-bug" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="Early Supporter" aria-label="Early Supporter badge">
+        <i class="fas fa-heart" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="Active Developer" aria-label="Active Developer badge">
+        <i class="fas fa-code" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="Verified Bot Developer" aria-label="Verified Bot Developer badge">
+        <i class="fas fa-robot" aria-hidden="true"></i>
+      </div>
+      <div class="badge" title="Moderator Programs Alumni" aria-label="Moderator Programs Alumni badge">
+        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+      </div>
     </div>
 
-    <div class="card-footer">
-      <span class="footer-text">Last updated: <span id="last-updated">Today</span></span>
-      <span class="footer-text">Profile v4.0</span>
+    <p class="bio" aria-label="User biography">Discord enthusiast | Web Developer | Open Source Contributor | Coffee Lover | Building awesome stuff for the community</p>
+
+    <div class="custom-status" aria-label="Custom status">
+      <i class="status-emoji" aria-hidden="true">🎮</i>
+      <span class="status-text">Playing Ultimate Discord Profile</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="tags" aria-label="User tags">
+      <div class="tag tag-booster" aria-label="Server Booster tag">
+        <i class="fas fa-rocket" aria-hidden="true"></i>
+        Server Booster
+      </div>
+      <div class="tag tag-admin" aria-label="Admin tag">
+        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+        Admin
+      </div>
+      <div class="tag tag-moderator" aria-label="Moderator tag">
+        <i class="fas fa-gavel" aria-hidden="true"></i>
+        Moderator
+      </div>
+      <div class="tag tag-owner" aria-label="Owner tag">
+        <i class="fas fa-crown" aria-hidden="true"></i>
+        Owner
+      </div>
+    </div>
+
+    <div class="activities">
+      <div class="activity" aria-label="Spotify activity">
+        <div class="activity-icon activity-spotify" aria-hidden="true">
+          <i class="fab fa-spotify" aria-hidden="true"></i>
+        </div>
+        <div class="activity-details">
+          <div class="activity-name">Spotify</div>
+          <div class="activity-state">Listening to Never Gonna Give You Up - Rick Astley</div>
+          <div class="activity-progress">
+            <div class="progress-bar">
+              <div class="progress-fill progress-fill-spotify" style="width: 35%"></div>
+            </div>
+            <div class="progress-time">
+              <span>1:23</span>
+              <span>3:32</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity" aria-label="Game activity">
+        <div class="activity-icon" aria-hidden="true">
+          <i class="fas fa-gamepad" aria-hidden="true"></i>
+        </div>
+        <div class="activity-details">
+          <div class="activity-name">Ultimate Discord</div>
+          <div class="activity-state">Playing for 2 hours</div>
+          <div class="activity-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 65%"></div>
+            </div>
+            <div class="progress-time">
+              <span>1:23:45</span>
+              <span>2:10:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="socials" aria-label="Social media links">
+      <a href="https://github.com" class="social" title="GitHub" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitter.com" class="social" title="Twitter" aria-label="Twitter profile" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://youtube.com" class="social" title="YouTube" aria-label="YouTube channel" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-youtube" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitch.tv" class="social" title="Twitch" aria-label="Twitch channel" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-twitch" aria-hidden="true"></i>
+      </a>
+      <a href="https://steamcommunity.com" class="social" title="Steam" aria-label="Steam profile" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-steam" aria-hidden="true"></i>
+      </a>
+      <a href="https://instagram.com" class="social" title="Instagram" aria-label="Instagram profile" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://reddit.com" class="social" title="Reddit" aria-label="Reddit profile" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-reddit" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="connections" aria-label="Connected accounts">
+      <div class="connections-title">
+        <i class="fas fa-link" aria-hidden="true"></i>
+        <span>Connections</span>
+      </div>
+      <div class="connections-list">
+        <div class="connection" aria-label="GitHub connection">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          <span>GitHub</span>
+          <span class="connection-username">@ultimateuser</span>
+        </div>
+        <div class="connection" aria-label="Twitter connection">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+          <span>Twitter</span>
+          <span class="connection-username">@ultimateuser</span>
+        </div>
+        <div class="connection" aria-label="Spotify connection">
+          <i class="fab fa-spotify" aria-hidden="true"></i>
+          <span>Spotify</span>
+          <span class="connection-username">Ultimate Listener</span>
+        </div>
+        <div class="connection" aria-label="Steam connection">
+          <i class="fab fa-steam" aria-hidden="true"></i>
+          <span>Steam</span>
+          <span class="connection-username">ultimate_gamer</span>
+        </div>
+        <div class="connection" aria-label="Xbox connection">
+          <i class="fab fa-xbox" aria-hidden="true"></i>
+          <span>Xbox</span>
+          <span class="connection-username">UltimateGamer123</span>
+        </div>
+        <div class="connection" aria-label="Battle.net connection">
+          <i class="fab fa-battle-net" aria-hidden="true"></i>
+          <span>Battle.net</span>
+          <span class="connection-username">Ultimate#1234</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="servers-container">
+      <div class="server-card" aria-label="Server information">
+        <img src="https://cdn.discordapp.com/icons/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=256" alt="Server icon" class="server-icon" loading="lazy">
+        <div class="server-details">
+          <div class="server-name">Ultimate Server</div>
+          <div class="server-members">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>1,234 online</span>
+            <span>5,678 members</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="server-card" aria-label="Server information">
+        <img src="https://cdn.discordapp.com/icons/987654321098765432/b_abcdef1234567890abcdef1234567890.webp?size=256" alt="Server icon" class="server-icon" loading="lazy">
+        <div class="server-details">
+          <div class="server-name">Gaming Hub</div>
+          <div class="server-members">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>3,456 online</span>
+            <span>8,901 members</span>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Custom Cursor -->
-  <div class="custom-cursor"></div>
-  <div class="cursor-trail"></div>
+  <div class="cursor-follower" aria-hidden="true"></div>
 
-  <!-- Audio Element -->
-  <audio id="bg-music" loop>
-    <source src="assets/background.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="click-sound">
-    <source src="assets/click.wav" type="audio/wav">
-  </audio>
-  <audio id="win-sound">
-    <source src="assets/win.mp3" type="audio/mpeg">
-  </audio>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cursor follower effect
+      const cursorFollower = document.querySelector('.cursor-follower');
+      
+      document.addEventListener('mousemove', (e) => {
+        cursorFollower.style.left = `${e.clientX}px`;
+        cursorFollower.style.top = `${e.clientY}px`;
+      });
 
-  <!-- Scripts -->
-  <script src="config.js"></script>
-  <script src="script.js"></script>
-  <script src="game.js"></script>
+      // Theme switching functionality
+      const themeOptions = document.querySelectorAll('.theme-option');
+      
+      themeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const theme = option.getAttribute('data-theme');
+          changeTheme(theme);
+        });
+      });
+
+      function changeTheme(theme) {
+        const root = document.documentElement;
+        
+        switch(theme) {
+          case 'dark':
+            root.style.setProperty('--primary', '#5865F2');
+            root.style.setProperty('--background', '#1e1f22');
+            root.style.setProperty('--card-bg', '#111214');
+            root.style.setProperty('--text-primary', '#dbdee1');
+            root.style.setProperty('--text-secondary', '#a5a9ad');
+            break;
+          case 'light':
+            root.style.setProperty('--primary', '#5865F2');
+            root.style.setProperty('--background', '#f2f3f5');
+            root.style.setProperty('--card-bg', '#ffffff');
+            root.style.setProperty('--text-primary', '#060607');
+            root.style.setProperty('--text-secondary', '#4e5058');
+            break;
+          case 'pink':
+            root.style.setProperty('--primary', '#EB459E');
+            root.style.setProperty('--background', '#2b2d31');
+            root.style.setProperty('--card-bg', '#1e1f22');
+            break;
+          case 'purple':
+            root.style.setProperty('--primary', '#9C84EF');
+            root.style.setProperty('--background', '#2b2d31');
+            root.style.setProperty('--card-bg', '#1e1f22');
+            break;
+          default: // Default theme
+            root.style.setProperty('--primary', '#5865F2');
+            root.style.setProperty('--background', '#313338');
+            root.style.setProperty('--card-bg', '#232428');
+            root.style.setProperty('--text-primary', '#F2F3F5');
+            root.style.setProperty('--text-secondary', '#B5BAC1');
+        }
+      }
+
+      // Live status updates
+      const status = document.querySelector('.status');
+      const statusRipple = document.querySelector('.status-ripple');
+      const statuses = [
+        { name: 'online', color: '#3BA55D' },
+        { name: 'idle', color: '#FAA81A' },
+        { name: 'dnd', color: '#ED4245' },
+        { name: 'offline', color: '#747F8D' }
+      ];
+      
+      function updateStatus() {
+        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+        status.style.backgroundColor = randomStatus.color;
+        statusRipple.style.backgroundColor = randomStatus.color;
+        status.setAttribute('title', randomStatus.name.charAt(0).toUpperCase() + randomStatus.name.slice(1));
+        
+        // Reset animation
+        statusRipple.style.animation = 'none';
+        void statusRipple.offsetWidth;
+        statusRipple.style.animation = 'ripple 1.5s infinite';
+      }
+      
+      // Change status every 10 seconds
+      setInterval(updateStatus, 10000);
+      updateStatus(); // Initial status
+
+      // Spotify progress animation
+      const spotifyProgress = document.querySelector('.progress-fill-spotify');
+      let spotifyProgressValue = 35;
+      
+      function animateSpotifyProgress() {
+        spotifyProgressValue = (spotifyProgressValue + 1) % 100;
+        spotifyProgress.style.width = `${spotifyProgressValue}%`;
+        
+        // Update time display
+        const currentTime = document.querySelector('.activity:nth-child(1) .progress-time span:first-child');
+        const totalTime = document.querySelector('.activity:nth-child(1) .progress-time span:last-child');
+        
+        if (spotifyProgressValue < 100) {
+          const currentSeconds = Math.floor(spotifyProgressValue * 212 / 100);
+          const minutes = Math.floor(currentSeconds / 60);
+          const seconds = currentSeconds % 60;
+          currentTime.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+      }
+      
+      setInterval(animateSpotifyProgress, 1000);
+
+      // Game progress animation
+      const gameProgress = document.querySelector('.activity:nth-child(2) .progress-fill');
+      let gameProgressValue = 65;
+      
+      function animateGameProgress() {
+        gameProgressValue = (gameProgressValue + 0.5) % 100;
+        gameProgress.style.width = `${gameProgressValue}%`;
+        
+        // Update time display
+        const currentTime = document.querySelector('.activity:nth-child(2) .progress-time span:first-child');
+        const totalTime = document.querySelector('.activity:nth-child(2) .progress-time span:last-child');
+        
+        if (gameProgressValue < 100) {
+          const currentSeconds = Math.floor(gameProgressValue * 7800 / 100);
+          const hours = Math.floor(currentSeconds / 3600);
+          const minutes = Math.floor((currentSeconds % 3600) / 60);
+          const seconds = currentSeconds % 60;
+          currentTime.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      }
+      
+      setInterval(animateGameProgress, 1000);
+
+      // Hover effects for interactive elements
+      const interactiveElements = document.querySelectorAll('.badge, .social, .connection, .server-card, .activity, .tag');
+      
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(2.5)';
+          cursorFollower.style.opacity = '0.4';
+          cursorFollower.style.width = '40px';
+          cursorFollower.style.height = '40px';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursorFollower.style.opacity = '1';
+          cursorFollower.style.width = '24px';
+          cursorFollower.style.height = '24px';
+        });
+      });
+
+      // Simulate typing effect for bio
+      const bio = document.querySelector('.bio');
+      const bioText = "Discord enthusiast | Web Developer | Open Source Contributor | Coffee Lover | Building awesome stuff for the community";
+      bio.textContent = '';
+      let i = 0;
+      
+      function typeWriter() {
+        if (i < bioText.length) {
+          bio.textContent += bioText.charAt(i);
+          i++;
+          setTimeout(typeWriter, Math.random() * 50 + 20);
+        }
+      }
+      
+      // Start typing after a short delay
+      setTimeout(typeWriter, 1000);
+    });
+  </script>
 </body>
 </html>

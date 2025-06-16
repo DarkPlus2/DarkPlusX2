@@ -10,9 +10,8 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
 </head>
 <body>
-  <!-- Space Background -->
+  <!-- Animated Background -->
   <div class="universe">
-    <div class="galaxy"></div>
     <div class="stars"></div>
     <div class="twinkling"></div>
     <div class="shooting-stars"></div>
@@ -20,82 +19,54 @@
   </div>
 
   <!-- Theme Panel -->
-  <div class="theme-panel">
+  <div class="panel theme-panel">
     <div class="panel-header">
-      <h3>THEME SELECTOR</h3>
+      <h3><i class="fas fa-palette"></i> THEME SELECTOR</h3>
       <button class="close-panel"><i class="fas fa-times"></i></button>
     </div>
     <div class="theme-grid"></div>
   </div>
 
-  <!-- Settings Panel -->
-  <div class="settings-panel">
-    <div class="panel-header">
-      <h3>SETTINGS</h3>
-      <button class="close-panel"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="settings-content">
-      <div class="setting-group">
-        <h4>Animations</h4>
-        <div class="toggle-group">
-          <label class="toggle-switch">
-            <input type="checkbox" id="avatar-animation" checked>
-            <span class="slider"></span>
-            <span>Avatar Float</span>
-          </label>
-          <label class="toggle-switch">
-            <input type="checkbox" id="particles-enabled" checked>
-            <span class="slider"></span>
-            <span>Particles</span>
-          </label>
-          <label class="toggle-switch">
-            <input type="checkbox" id="cursor-effects" checked>
-            <span class="slider"></span>
-            <span>Cursor Effects</span>
-          </label>
-        </div>
-      </div>
-      <div class="setting-group">
-        <h4>Performance</h4>
-        <div class="range-control">
-          <label for="particle-density">Particle Density</label>
-          <input type="range" id="particle-density" min="5" max="100" value="30">
-          <span class="value-display">30</span>
-        </div>
-        <div class="range-control">
-          <label for="animation-speed">Animation Speed</label>
-          <input type="range" id="animation-speed" min="0.5" max="2" step="0.1" value="1">
-          <span class="value-display">1x</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Game Panel -->
-  <div class="game-panel">
+  <div class="panel game-panel">
     <div class="panel-header">
-      <h3>MINI GAME</h3>
+      <h3><i class="fas fa-gamepad"></i> TIC TAC TOE</h3>
       <button class="close-panel"><i class="fas fa-times"></i></button>
     </div>
     <div class="game-container">
-      <canvas id="game-canvas"></canvas>
-      <div class="game-controls">
-        <button id="start-game" class="game-btn">Start Game</button>
-        <button id="reset-game" class="game-btn">Reset</button>
+      <div class="game-info">
+        <div class="player-turn">
+          <span id="current-player">X</span>'s Turn
+        </div>
+        <div class="game-stats">
+          <div class="stat">
+            <span>X Wins:</span>
+            <span id="x-wins">0</span>
+          </div>
+          <div class="stat">
+            <span>O Wins:</span>
+            <span id="o-wins">0</span>
+          </div>
+          <div class="stat">
+            <span>Draws:</span>
+            <span id="draws">0</span>
+          </div>
+        </div>
       </div>
-      <div class="game-stats">
-        <div class="stat">
-          <span>Score:</span>
-          <span id="game-score">0</span>
-        </div>
-        <div class="stat">
-          <span>High Score:</span>
-          <span id="high-score">0</span>
-        </div>
-        <div class="stat">
-          <span>Level:</span>
-          <span id="game-level">1</span>
-        </div>
+      <div class="tic-tac-toe-grid" id="game-board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+      <div class="game-controls">
+        <button id="reset-game" class="btn">Reset Game</button>
+        <button id="new-game" class="btn primary">New Game</button>
       </div>
     </div>
   </div>
@@ -106,28 +77,15 @@
       <i class="fas fa-palette"></i>
       <span>Themes</span>
     </button>
-    <button class="nav-btn settings-btn">
-      <i class="fas fa-cog"></i>
-      <span>Settings</span>
-    </button>
     <button class="nav-btn game-btn">
       <i class="fas fa-gamepad"></i>
       <span>Game</span>
     </button>
-  </nav>
-
-  <!-- Music Player -->
-  <div class="music-player">
-    <button class="music-toggle">
+    <button class="nav-btn music-toggle">
       <i class="fas fa-music"></i>
+      <span>Music</span>
     </button>
-    <audio id="bg-music" loop>
-      <source src="assets/background.mp3" type="audio/mpeg">
-    </audio>
-    <div class="volume-control">
-      <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
-    </div>
-  </div>
+  </nav>
 
   <!-- Main Profile Card -->
   <main class="profile-card animate__animated animate__fadeIn">
@@ -144,7 +102,7 @@
       <!-- Profile Section -->
       <section class="profile-section">
         <div class="avatar-container">
-          <img src="" alt="Avatar" class="profile-avatar">
+          <img src="https://cdn.discordapp.com/avatars/YOUR_ID/YOUR_AVATAR.webp?size=512" alt="Avatar" class="profile-avatar floating">
           <div class="status-indicator online"></div>
           <div class="status-ripple"></div>
           <div class="avatar-halo"></div>
@@ -155,22 +113,32 @@
 
         <div class="profile-info">
           <h1 class="profile-name">
-            <span class="username"></span>
-            <span class="discriminator"></span>
+            <span class="username">YourName</span>
+            <span class="discriminator">#0000</span>
           </h1>
           
-          <div class="badges-container"></div>
+          <div class="badges-container">
+            <div class="badge" data-tooltip="Discord Staff">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="badge" data-tooltip="Partnered Server Owner">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="badge" data-tooltip="Certified Moderator">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+          </div>
 
           <div class="profile-status">
-            <i class="status-emoji"></i>
-            <span class="status-text"></span>
+            <i class="status-emoji fas fa-smile"></i>
+            <span class="status-text">Playing Tic Tac Toe</span>
           </div>
         </div>
       </section>
 
       <!-- Bio Section -->
       <section class="bio-section">
-        <p class="profile-bio"></p>
+        <p class="profile-bio">🌟 Full-stack Developer | Open Source Contributor | UI/UX Designer | Coffee Enthusiast | Game Developer | Competitive Gamer | Chess Enthusiast</p>
       </section>
 
       <!-- Divider -->
@@ -182,24 +150,30 @@
 
       <!-- Tags Section -->
       <section class="tags-section">
-        <div class="tags-container"></div>
+        <div class="tags-container">
+          <span class="tag">#developer</span>
+          <span class="tag">#gamer</span>
+          <span class="tag">#javascript</span>
+          <span class="tag">#design</span>
+          <span class="tag">#competitive</span>
+        </div>
       </section>
 
       <!-- Activity Section -->
       <section class="activity-section">
         <div class="activity-card">
           <div class="activity-icon">
-            <i class="activity-icon-img"></i>
+            <i class="fas fa-chess"></i>
           </div>
           <div class="activity-details">
-            <h4 class="activity-title"></h4>
-            <p class="activity-description"></p>
+            <h4 class="activity-title">Playing Tic Tac Toe</h4>
+            <p class="activity-description">Current streak: 3 wins</p>
             <div class="activity-progress">
-              <div class="progress-bar"></div>
+              <div class="progress-bar" style="width: 75%"></div>
             </div>
             <div class="activity-time">
               <i class="far fa-clock"></i>
-              <span class="time-text"></span>
+              <span class="time-text">15m 22s</span>
             </div>
           </div>
         </div>
@@ -207,47 +181,26 @@
 
       <!-- Social Links -->
       <section class="social-section">
-        <div class="social-links"></div>
-      </section>
-
-      <!-- Connections Section -->
-      <section class="connections-section">
-        <h3 class="section-title">
-          <i class="fas fa-link"></i>
-          <span>CONNECTIONS</span>
-        </h3>
-        <div class="connections-grid"></div>
-      </section>
-
-      <!-- Stats Section -->
-      <section class="stats-section">
-        <h3 class="section-title">
-          <i class="fas fa-chart-bar"></i>
-          <span>STATISTICS</span>
-        </h3>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-users"></i></div>
-            <div class="stat-value" id="followers-count">0</div>
-            <div class="stat-label">Followers</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-code"></i></div>
-            <div class="stat-value" id="projects-count">0</div>
-            <div class="stat-label">Projects</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fas fa-heart"></i></div>
-            <div class="stat-value" id="likes-count">0</div>
-            <div class="stat-label">Likes</div>
-          </div>
+        <div class="social-links">
+          <a href="https://discord.com/users/YOUR_ID" class="social-link discord" target="_blank">
+            <i class="fab fa-discord"></i>
+            <span>Discord</span>
+          </a>
+          <a href="https://github.com/YOUR_GITHUB" class="social-link github" target="_blank">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://twitter.com/YOUR_TWITTER" class="social-link twitter" target="_blank">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
         </div>
       </section>
     </div>
 
     <div class="card-footer">
-      <span class="footer-text">Last updated: <span id="last-updated"></span></span>
-      <span class="footer-text">Profile v3.0.0</span>
+      <span class="footer-text">Last updated: <span id="last-updated">Today</span></span>
+      <span class="footer-text">Profile v4.0</span>
     </div>
   </main>
 
@@ -255,9 +208,20 @@
   <div class="custom-cursor"></div>
   <div class="cursor-trail"></div>
 
+  <!-- Audio Element -->
+  <audio id="bg-music" loop>
+    <source src="assets/background.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="click-sound">
+    <source src="assets/click.wav" type="audio/wav">
+  </audio>
+  <audio id="win-sound">
+    <source src="assets/win.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- Scripts -->
   <script src="config.js"></script>
-  <script src="game.js"></script>
   <script src="script.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
